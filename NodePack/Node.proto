@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option go_package = "https://github.com/Werenfeldt/DisysExercise2/NodePack/main";
+
+package main;
+
+
+
+service Node{
+    rpc Message(Request) returns (Reply);
+    
+}
+
+
+
+message Request{
+    //string message = 1;
+    int32 nodeid = 1;
+    int32 time = 2;
+}
+
+message Reply{
+    string reply = 1; 
+}
