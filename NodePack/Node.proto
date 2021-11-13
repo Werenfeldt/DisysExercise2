@@ -1,24 +1,37 @@
 syntax = "proto3";
 
-option go_package = "https://github.com/Werenfeldt/DisysExercise2/NodePack/main";
+option go_package = "https://github.com/Werenfeldt/DisysExercise2/NodePack";
 
 package main;
 
 
 
 service Node{
-    rpc Message(Request) returns (Reply);
+    rpc Permission(RequestPermission) returns (GivePermission);
+    rpc AccesCrit(GoIntoCrit) returns (ServerDoneInCrit);
+    rpc ExitCrit(ReleaseToken) returns (Empty);
+}
+
+message GoIntoCrit{
+    string goIntoCrit = 1;
+}
+
+message ServerDoneInCrit{
+    string serverDoneInCrit = 1;
+}
+
+message RequestPermission{
+    int32 nodeid = 1;
+}
+
+message GivePermission{
+    string givePermission = 1;
     
 }
 
-
-
-message Request{
-    //string message = 1;
+message ReleaseToken{
     int32 nodeid = 1;
-    int32 time = 2;
 }
 
-message Reply{
-    string reply = 1; 
+message Empty{
 }

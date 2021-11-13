@@ -1,97 +1,91 @@
-package main
+package NodePack
 
 import (
 	context "context"
-	"fmt"
 	"log"
-	"net"
-	"os"
 
-	"google.golang.org/grpc"
+	//"fmt"
+	// "log"
+	// "net"
+	// "os"
+	// "google.golang.org/grpc"
+	"sync"
+	"time"
 )
 
 var MeNode node
 
-func main(){
-	fmt.Println("Starting Server")
-	InitServer()
-	// fmt.Println("Starting Client")
-	// InitClient()
-}
-
-type InitNode struct {
+type Nodeserver struct{
 	
 }
 
-func MakeNode(id int, totalNodes int) node{
-	MeNode = node{
-		id: id,
-		time: 0,
-		state: 0,
-		numberTotalNode: totalNodes, 
-	}
-	return MeNode
-	
+
+type CriticalSection struct {
+	CritSection int32 
+	mu sync.Mutex
 }
+var CritObject = CriticalSection{}
 
-func InitServer(){
-	Port := os.Getenv("PORT")
-	if Port == "" {
-		Port = "8080" //default Port set to 8080 if PORT is not set in env
-	}
+// func MakeNode(id int, totalNodes int) node{
+// 	MeNode = node{
+// 		id: id,
+// 		time: 0,
+// 		state: 0,
+// 		numberTotalNode: totalNodes, 
+// 	}
+// 	return MeNode
+	
+// }
 
-	//init listener
-	listen, err := net.Listen("tcp", ":"+Port)
-	if err != nil {
-		log.Fatalf("Could not listen @ %v :: %v", Port, err)
-	}
-	grpcserver := grpc.NewServer()
-	log.Printf("new grpc server - listen on: %v", listen )
+func (c *Nodeserver) Permission(ctx context.Context, in *RequestPermission) (*GivePermission, error) {
+	
+	//c.AddClient(client{ClientUniqueCode: in.Nodeid})
 
-	RegisterNodeServer(grpcserver, &InitNode{})
-	fmt.Println("InitNode")
-
-	// err = grpcserver.Serve(listen)
-	// if err != nil {
-	// 	log.Fatalf("Failed to start gRPC Server :: %v", err)
+	
+	// if(len(clientObject.CQue)==0){
+		CritObject.mu.Lock()
+		log.Printf("The CritSection is locked and Node %v has permission \n", in.Nodeid)
+		return &GivePermission{GivePermission: "You have permission"}, nil
+		
+	// 	fmt.Println("Crit Locked - Node Crit: ", CritObject.CritSection);
+	// } else {
+	// 	clientObject.CQue = append(clientObject.CQue, client{ClientUniqueCode: in.Nodeid})
 	// }
-	fmt.Println("Starting Client")
-	InitClient()
+}
+
+func (c *Nodeserver) AccesCrit(ctx context.Context, in *GoIntoCrit) (*ServerDoneInCrit, error) {
 	
-	if err := grpcserver.Serve(listen); err != nil {
-		log.Fatalf("failed to serve: %v", err)
-	}
-	fmt.Println("Listening")
+	CritObject.CritSection++
+	log.Printf("The CritSection has been accessed and incremented \n")
+	return &ServerDoneInCrit{ServerDoneInCrit: "The Server is done"}, nil	
+}
+//not used
+func (c *Nodeserver) ExitCrit(ctx context.Context, in *ReleaseToken) (*Empty, error) {
+	time.Sleep(5 * time.Second)
+	CritObject.mu.Unlock()
+	log.Printf("The CritSection has been unlocked \n")
+	return &Empty{}, nil	
 }
 
 
-func InitClient(){
-	conn, err := grpc.Dial("localhost:8080", grpc.WithInsecure())
-
-	if err != nil {
-		log.Fatalf("Failed to connect to gRPC server :: %v", err)
-	} else {
-		log.Println("Dialed localhost:8080")
-	}
-	defer conn.Close()
-
-	nodeClient := NewNodeClient(conn)
-
-
-	ctx := context.Background()
-	//defer cancel()
-	reply, err := nodeClient.Message(ctx, &Request{Nodeid: 1, Time: 1})
-	if err != nil {
-		log.Fatalf("could not greet: %v", err)
-	}
-	
-	log.Println(reply)
+func (is *Nodeserver) AddClient(client client) {
+		clientObject.mu.Lock()
+		clientObject.CQue = append(clientObject.CQue, client)
+		clientObject.mu.Unlock()	
 }
 
 
-func (c *InitNode) Message(ctx context.Context, in *Request) (*Reply, error) {
-	return &Reply{Reply: "Response right here"}, nil
+//Structs
+type client struct {
+	ClientUniqueCode int32
 }
+
+type que struct {
+	CQue []client
+	mu   sync.Mutex
+}
+
+var clientObject = que{}
 
 type node struct{
 	id 		int 
@@ -110,3 +104,11 @@ const (
 )
 
 
+/*
+Client sender request
+Server checker om CS er i brug
+Hvis ikke i brug, giv permission
+Hvis i brug, send request i køen
+Når client exiter, siger vi til server at CS ikke er i brug
+Og server vælger den næste i køen og giver permission
+*/
