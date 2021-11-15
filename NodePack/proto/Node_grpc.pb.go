@@ -65,7 +65,7 @@ type NodeServer interface {
 	Permission(context.Context, *RequestPermission) (*GivePermission, error)
 	AccesCrit(context.Context, *GoIntoCrit) (*ServerDoneInCrit, error)
 	ExitCrit(context.Context, *ReleaseToken) (*Empty, error)
-	
+	mustEmbedUnimplementedNodeServer()
 }
 
 // UnimplementedNodeServer must be embedded to have forward compatible implementations.
@@ -169,5 +169,5 @@ var Node_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "NodePack/node.proto",
+	Metadata: "Node.proto",
 }

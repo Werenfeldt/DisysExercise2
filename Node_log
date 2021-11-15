@@ -1,0 +1,74 @@
+2021/11/15 18:00:33 Listening @ : 8080
+2021/11/15 18:00:40 Node 2 has asked for permission 
+2021/11/15 18:00:40 The CritSection is locked and Node 2 has permission 
+2021/11/15 18:00:40 The CritSection has been accessed by 2 and incremented 
+2021/11/15 18:00:45 The CritSection has been unlocked 
+2021/11/15 18:00:45 Node 2 has asked for permission 
+2021/11/15 18:00:45 The CritSection is locked and Node 2 has permission 
+2021/11/15 18:00:45 The CritSection has been accessed by 2 and incremented 
+2021/11/15 18:00:47 Node 5 has asked for permission 
+2021/11/15 18:00:50 The CritSection has been unlocked 
+2021/11/15 18:00:50 The CritSection is locked and Node 5 has permission 
+2021/11/15 18:00:50 Node 2 has asked for permission 
+2021/11/15 18:00:50 The CritSection has been accessed by 5 and incremented 
+2021/11/15 18:00:55 Node 8 has asked for permission 
+2021/11/15 18:00:55 The CritSection is locked and Node 2 has permission 
+2021/11/15 18:00:55 The CritSection has been unlocked 
+2021/11/15 18:00:55 The CritSection has been accessed by 2 and incremented 
+2021/11/15 18:00:55 Node 5 has asked for permission 
+2021/11/15 18:01:00 The CritSection has been unlocked 
+2021/11/15 18:01:00 The CritSection is locked and Node 8 has permission 
+2021/11/15 18:01:00 Node 2 has asked for permission 
+2021/11/15 18:01:00 The CritSection has been accessed by 8 and incremented 
+2021/11/15 18:01:05 The CritSection has been unlocked 
+2021/11/15 18:01:05 The CritSection is locked and Node 5 has permission 
+2021/11/15 18:01:05 Node 8 has asked for permission 
+2021/11/15 18:01:05 The CritSection has been accessed by 5 and incremented 
+2021/11/15 18:01:10 The CritSection has been unlocked 
+2021/11/15 18:01:10 The CritSection is locked and Node 2 has permission 
+2021/11/15 18:01:10 Node 5 has asked for permission 
+2021/11/15 18:01:10 The CritSection has been accessed by 2 and incremented 
+2021/11/15 18:01:15 The CritSection has been unlocked 
+2021/11/15 18:01:15 The CritSection is locked and Node 8 has permission 
+2021/11/15 18:01:15 Node 2 has asked for permission 
+2021/11/15 18:01:15 The CritSection has been accessed by 8 and incremented 
+2021/11/15 18:01:20 The CritSection has been unlocked 
+2021/11/15 18:01:20 The CritSection is locked and Node 5 has permission 
+2021/11/15 18:01:20 The CritSection has been accessed by 5 and incremented 
+2021/11/15 18:01:20 Node 8 has asked for permission 
+2021/11/15 18:01:25 The CritSection is locked and Node 2 has permission 
+2021/11/15 18:01:25 The CritSection has been unlocked 
+2021/11/15 18:01:25 The CritSection has been accessed by 2 and incremented 
+2021/11/15 18:01:25 Node 5 has asked for permission 
+2021/11/15 18:01:30 The CritSection has been unlocked 
+2021/11/15 18:01:30 The CritSection is locked and Node 8 has permission 
+2021/11/15 18:01:30 Node 2 has asked for permission 
+2021/11/15 18:01:30 The CritSection has been accessed by 8 and incremented 
+2021/11/15 18:01:35 The CritSection has been unlocked 
+2021/11/15 18:01:35 The CritSection is locked and Node 5 has permission 
+2021/11/15 18:01:35 Node 8 has asked for permission 
+2021/11/15 18:01:35 The CritSection has been accessed by 5 and incremented 
+2021/11/15 18:01:40 The CritSection has been unlocked 
+2021/11/15 18:01:40 The CritSection is locked and Node 2 has permission 
+2021/11/15 18:01:40 The CritSection has been accessed by 2 and incremented 
+2021/11/15 18:01:40 Node 5 has asked for permission 
+2021/11/15 18:01:45 The CritSection has been unlocked 
+2021/11/15 18:01:45 The CritSection is locked and Node 8 has permission 
+2021/11/15 18:01:45 The CritSection has been accessed by 8 and incremented 
+2021/11/15 18:01:45 Node 2 has asked for permission 
+2021/11/15 18:01:50 The CritSection has been unlocked 
+2021/11/15 18:01:50 The CritSection is locked and Node 5 has permission 
+2021/11/15 18:01:50 The CritSection has been accessed by 5 and incremented 
+2021/11/15 18:01:50 Node 8 has asked for permission 
+2021/11/15 18:01:55 The CritSection has been unlocked 
+2021/11/15 18:01:55 The CritSection is locked and Node 2 has permission 
+2021/11/15 18:01:55 The CritSection has been accessed by 2 and incremented 
+2021/11/15 18:01:55 Node 5 has asked for permission 
+2021/11/15 18:02:00 The CritSection has been unlocked 
+2021/11/15 18:02:00 The CritSection is locked and Node 8 has permission 
+2021/11/15 18:02:00 Node 2 has asked for permission 
+2021/11/15 18:02:00 The CritSection has been accessed by 8 and incremented 
+2021/11/15 18:02:05 The CritSection has been unlocked 
+2021/11/15 18:02:05 The CritSection is locked and Node 5 has permission 
+2021/11/15 18:02:05 The CritSection has been accessed by 5 and incremented 
+2021/11/15 18:02:05 Node 8 has asked for permission 

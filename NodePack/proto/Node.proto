@@ -13,7 +13,7 @@ service Node{
 }
 
 message GoIntoCrit{
-    string goIntoCrit = 1;
+    int32 nodeid = 1;
 }
 
 message ServerDoneInCrit{

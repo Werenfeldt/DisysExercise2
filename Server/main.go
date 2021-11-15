@@ -7,6 +7,7 @@ import (
 	"os"
 
 	Node "DisysExercise2/NodePack"
+	proto "DisysExercise2/NodePack/proto"
 
 	"google.golang.org/grpc"
 )
@@ -14,7 +15,7 @@ import (
 func main() {
 	//Init log file
 	
-	LOG_FILE := "../chittyChat_log"
+	LOG_FILE := "../Node_log"
 
 	logFile, err := os.OpenFile(LOG_FILE, os.O_APPEND|os.O_RDWR|os.O_CREATE, 0644)
 
@@ -25,7 +26,7 @@ func main() {
 
 	log.SetOutput(logFile)
 
-	log.SetFlags(log.Flags() &^ (log.Ldate | log.Ltime))
+	//log.SetFlags(log.Flags() &^ (log.Ldate | log.Ltime))
 
 	//Init port
 	Port := os.Getenv("PORT")
@@ -46,7 +47,7 @@ func main() {
 
 	//register ChatService
 	cs := Node.Nodeserver{}
-	Node.RegisterNodeServer(grpcserver, &cs)
+	proto.RegisterNodeServer(grpcserver, &cs)
 
 	//grpc listen and serve
 	err = grpcserver.Serve(listen)

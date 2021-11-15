@@ -3,23 +3,25 @@ package NodePack
 import (
 	context "context"
 	"log"
-
+	pb "DisysExercise2/NodePack/proto"
 	//"fmt"
 	// "log"
 	// "net"
 	// "os"
-	// "google.golang.org/grpc"
+	//"google.golang.org/grpc"
 	"sync"
 	"time"
+	
+	
 )
 
 var MeNode node
 
 type Nodeserver struct{
-	
+	pb.UnimplementedNodeServer
 }
 
-
+	
 type CriticalSection struct {
 	CritSection int32 
 	mu sync.Mutex
@@ -37,15 +39,16 @@ var CritObject = CriticalSection{}
 	
 // }
 
-func (c *Nodeserver) Permission(ctx context.Context, in *RequestPermission) (*GivePermission, error) {
+func (c *Nodeserver) Permission(ctx context.Context, in *pb.RequestPermission) (*pb.GivePermission, error) {
 	
 	//c.AddClient(client{ClientUniqueCode: in.Nodeid})
 
 	
 	// if(len(clientObject.CQue)==0){
+		log.Printf("Node %v has asked for permission \n", in.Nodeid)
 		CritObject.mu.Lock()
 		log.Printf("The CritSection is locked and Node %v has permission \n", in.Nodeid)
-		return &GivePermission{GivePermission: "You have permission"}, nil
+		return &pb.GivePermission{GivePermission: "You have permission"}, nil
 		
 	// 	fmt.Println("Crit Locked - Node Crit: ", CritObject.CritSection);
 	// } else {
@@ -53,18 +56,18 @@ func (c *Nodeserver) Permission(ctx context.Context, in *RequestPermission) (*Gi
 	// }
 }
 
-func (c *Nodeserver) AccesCrit(ctx context.Context, in *GoIntoCrit) (*ServerDoneInCrit, error) {
+func (c *Nodeserver) AccesCrit(ctx context.Context, in *pb.GoIntoCrit) (*pb.ServerDoneInCrit, error) {
 	
 	CritObject.CritSection++
-	log.Printf("The CritSection has been accessed and incremented \n")
-	return &ServerDoneInCrit{ServerDoneInCrit: "The Server is done"}, nil	
+	log.Printf("The CritSection has been accessed by %v and incremented \n", in.Nodeid)
+	return &pb.ServerDoneInCrit{ServerDoneInCrit: "The Server is done"}, nil	
 }
 //not used
-func (c *Nodeserver) ExitCrit(ctx context.Context, in *ReleaseToken) (*Empty, error) {
+func (c *Nodeserver) ExitCrit(ctx context.Context, in *pb.ReleaseToken) (*pb.Empty, error) {
 	time.Sleep(5 * time.Second)
 	CritObject.mu.Unlock()
 	log.Printf("The CritSection has been unlocked \n")
-	return &Empty{}, nil	
+	return &pb.Empty{}, nil	
 }
 
 
