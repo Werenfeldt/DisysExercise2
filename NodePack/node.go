@@ -1,9 +1,10 @@
 package NodePack
 
 import (
+	pb "DisysExercise2/NodePack/proto"
 	context "context"
 	"log"
-	pb "DisysExercise2/NodePack/proto"
+
 	//"fmt"
 	// "log"
 	// "net"
@@ -11,8 +12,6 @@ import (
 	//"google.golang.org/grpc"
 	"sync"
 	"time"
-	
-	
 )
 
 var MeNode node
@@ -64,7 +63,7 @@ func (c *Nodeserver) AccesCrit(ctx context.Context, in *pb.GoIntoCrit) (*pb.Serv
 }
 //not used
 func (c *Nodeserver) ExitCrit(ctx context.Context, in *pb.ReleaseToken) (*pb.Empty, error) {
-	time.Sleep(5 * time.Second)
+	time.Sleep(2 * time.Second)
 	CritObject.mu.Unlock()
 	log.Printf("The CritSection has been unlocked \n")
 	return &pb.Empty{}, nil	

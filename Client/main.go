@@ -37,7 +37,7 @@ func main() {
 func clientConfig(conn *grpc.ClientConn) {
 
 	//reader := bufio.NewReader(os.Stdin)
-	fmt.Printf("Welcome to Chitty Chat! \n")
+	fmt.Printf("Welcome to Node! \n")
 	fmt.Printf("Enter your id : ")
 	var input int
 	_, err := fmt.Scan(&input)
